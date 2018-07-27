@@ -24,6 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
       user: null,
+      redirectAfterRegister: false,
     };
 
     this.onLogout = this.onLogout.bind(this);
@@ -37,11 +38,10 @@ class App extends Component {
   }
 
   onLogout() {
-    this.setState({ user: null });
+    this.setState({ user: null, redirectAfterRegister: false });
   }
 
   onSignInHandler(credential) {
-    console.log(credential);
     this.fetchSignInInfo(credential);
   }
 
@@ -54,13 +54,14 @@ class App extends Component {
     })
       .then((response) => {
         if (response.status === 201) {
+          alert('Registration Success. You can login now');
           return response.json();
         }
         alert('Registration Failed');
         return null;
       })
-      .then((result) => {
-        this.setSignInInfo(result.newUser); // {email, id, name, phone}
+      .then(() => {
+        this.setState({ redirectAfterRegister: true });
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +77,6 @@ class App extends Component {
       headers: { ...HEADER },
     })
       .then((response) => {
-        console.log('update status: ', response.status);
         if (response.status === 201) {
           alert('Update Success !');
           return response.json();
@@ -85,7 +85,6 @@ class App extends Component {
         return null;
       })
       .then((result) => {
-        console.log('update new status : ', result);
         this.setSignInInfo(result.updatedUser, user.password); // {email, id, name, phone}
       })
       .catch((err) => {
@@ -95,7 +94,7 @@ class App extends Component {
 
   setSignInInfo(result, password) {
     result = { ...result, password };
-    this.setState({ user: result });
+    this.setState({ user: result, redirectAfterRegister: true });
   }
 
   fetchSignInInfo(credential) {
@@ -121,7 +120,7 @@ class App extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user, redirectAfterRegister } = this.state;
 
     return (
       <div>
@@ -161,20 +160,21 @@ class App extends Component {
                     <Register
                       title="Register"
                       onRegisterHandler={this.onRegisterHandler}
+                      redirectAfterRegister={redirectAfterRegister}
                     />
                   )}
                 />
               }
               <Route component={() => (
                 <h1>
-404: not found
+                  404: not found
                 </h1>
               )}
               />
             </Switch>
             <div className="footer">
               <p>
-risyana.github.io
+                risyana.github.io
               </p>
             </div>
           </div>

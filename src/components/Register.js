@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 class Register extends React.Component {
   constructor(props) {
@@ -7,11 +7,11 @@ class Register extends React.Component {
 
     this.state = {
       user: {
-        email: "",
-        password: "",
-        name: "",
-        phone: ""
-      }
+        email: '',
+        password: '',
+        name: '',
+        phone: '',
+      },
     };
 
     this.updateValues = this.updateValues.bind(this);
@@ -19,23 +19,31 @@ class Register extends React.Component {
 
   updateValues(e) {
     let { user } = this.state;
-    let id = e.target.id;
-    let value = e.target.value;
-    let updatedInfo = { [id]: value };
+    const { id, value } = e.target;
+    const updatedInfo = { [id]: value };
 
     user = { ...user, ...updatedInfo };
     this.setState({ user });
   }
 
   render() {
-    let { user } = this.state;
-    let { onRegisterHandler } = this.props;
+    const { user } = this.state;
+    const { onRegisterHandler, title, redirectAfterRegister } = this.props;
+
+    if (redirectAfterRegister) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="main">
-        <h3>{this.props.title}</h3>
+        <h3>
+          {title}
+        </h3>
         <form className="portfolioForm" onChange={this.updateValues}>
           <div>
-            <span>Email </span>
+            <span>
+              Email
+            </span>
             <input
               id="email"
               type="email"
@@ -44,20 +52,27 @@ class Register extends React.Component {
             />
           </div>
           <div>
-            <span>Name </span>
+            <span>
+              Name
+            </span>
             <input id="name" type="text" onChange={this.updateValues} />
           </div>
           <div>
-            <span>Phone </span>
+            <span>
+              Phone
+            </span>
             <input id="phone" type="text" onChange={this.updateValues} />
           </div>
           <div>
-            <span>Password </span>
+            <span>
+              Password
+            </span>
             <input id="password" type="password" onChange={this.updateValues} />
           </div>
           <div style={{ marginTop: 15 }}>
-            <span> </span>
+            <span />
             <input
+              className="btn"
               type="button"
               value="Register"
               onClick={() => {
@@ -66,7 +81,9 @@ class Register extends React.Component {
             />
           </div>
         </form>
-        <Link to={"/"}> Cancel </Link>
+        <Link to="/">
+          Cancel
+        </Link>
       </div>
     );
   }
