@@ -1,0 +1,15 @@
+{
+  "name": "frontend-users",
+  "version": "1.0.0",
+  "description": "Dashboard of user management",
+  "keywords": [],
+  "homepage": "https://codesandbox.io/s/1807volknq",
+  "main": "index.js",
+  "dependencies": {
+    "react-router-dom": "4.2.2",
+    "react-dom": "16.0.0",
+    "react": "16.0.0",
+    "marked": "0.3.7",
+    "firebase": "4.6.2"
+  }
+}
