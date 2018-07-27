@@ -6,6 +6,7 @@ module.exports = {
         "navigator": true,
         "URL": true,
         "fetch": true,
+        "alert" : true,
     },
     "rules": {
         "linebreak-style": 0,

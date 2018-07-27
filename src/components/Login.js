@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import Dashboard from "./Dashboard";
+import { Link } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,8 +18,7 @@ class Login extends React.Component {
 
   updateValues(e) {
     let { user } = this.state;
-    const id = e.target.id;
-    const value = e.target.value;
+    const { id, value } = e.target;
     const updatedInfo = { [id]: value };
 
     user = { ...user, ...updatedInfo };
@@ -27,36 +26,36 @@ class Login extends React.Component {
   }
 
   render() {
-    const { user } = this.state;
-    const { onSignInHandler, currentUser } = this.props;
+    const { user, email, password } = this.state;
+    const { onSignInHandler, currentUser, title } = this.props;
 
     if (currentUser) return <Dashboard />;
 
-    if (currentUser === undefined) return <h1 />;
+    if (currentUser === undefined) {
+      return <p />;
+    }
 
     return (
       <div className="main">
         <div className="loginWrapper">
           <h3>
-{this.props.title}
-</h3>
+            {title}
+          </h3>
           <form className="login" onChange={this.updateValues}>
             <div>
               <span>
-Email
-{' '}
-</span>
-              <input id="email" type="email" value={this.state.email} />
+                {'Email'}
+              </span>
+              <input id="email" type="email" value={email} />
             </div>
             <div>
               <span>
-Password
-{' '}
-</span>
+                {'Password'}
+              </span>
               <input
                 id="password"
                 type="password"
-                value={this.state.password}
+                value={password}
               />
             </div>
             <div style={{ marginTop: 15 }}>
@@ -72,10 +71,8 @@ Password
             </div>
           </form>
           <Link to="/register">
-{' '}
-Register
-{' '}
-</Link>
+            {'Register'}
+          </Link>
           <div />
         </div>
       </div>

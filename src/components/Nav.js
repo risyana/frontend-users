@@ -10,36 +10,34 @@ const UL_STYLE = {
   listStyleType: 'none',
 };
 
-class Nav extends React.Component {
-  render() {
-    const { onlogout, user } = this.props;
+const Nav = (props) => {
+  const { onlogout, user } = props;
 
-    // if (!user) return <div className="nav" />;
-    if (!user) return null;
+  if (!user) return null;
 
-    return (
-      <div className="nav">
-        <ul style={UL_STYLE}>
-          <li>
-            <Link to={`/profile/edit/${user.id}`}>
-Edit Profil
-</Link>
-          </li>
-          <li>
-            <Link to="/" />
-          </li>
-          <li>
-            <Link to="/" />
-          </li>
-          <li>
-            <a href="#" onClick={onlogout}>
-              Logout
-            </a>
-          </li>
-        </ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="nav">
+      <ul style={UL_STYLE}>
+        <li>
+          <Link to={`/profile/edit/${user.id}`}>
+            Edit Profil
+          </Link>
+        </li>
+        <li>
+          <Link to="/" />
+        </li>
+        <li>
+          <Link to="/" />
+        </li>
+        <li>
+          <a onClick={onlogout} href="##">
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 
 export default Nav;
