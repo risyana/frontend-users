@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
+import Password from './components/Password';
 import './index.css';
 
 const history = createBrowserHistory();
@@ -157,6 +158,12 @@ class App extends Component {
                 path="/profile"
                 component={() => (
                   <Profile user={user} onUpdateHandler={this.onUpdateHandler} />
+                )}
+              />
+              <Route
+                path="/password"
+                component={() => (
+                  <Password user={user} onUpdateHandler={this.onUpdateHandler} />
                 )}
               />
               {
