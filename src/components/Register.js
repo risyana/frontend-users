@@ -85,7 +85,7 @@ class Register extends React.Component {
         validationResult = validatePassword(value);
         break;
       case 'rePassword':
-        validationResult = validateRePassword(value, isValid, user);
+        validationResult = validateRePassword(value, isValid.password, user.password);
         break;
       default:
         validationResult = { isValid: true, message: '' };
