@@ -20,7 +20,12 @@ const Nav = (props) => {
       <ul style={UL_STYLE}>
         <li>
           <Link to={`/profile/edit/${user.id}`}>
-            Edit Profil
+            {'Edit Profil'}
+          </Link>
+        </li>
+        <li>
+          <Link to={`/password/edit/${user.id}`}>
+            {'Edit Password'}
           </Link>
         </li>
         <li>
@@ -31,7 +36,7 @@ const Nav = (props) => {
         </li>
         <li>
           <a onClick={onlogout} href="##">
-            Logout
+            {'Logout'}
           </a>
         </li>
       </ul>
