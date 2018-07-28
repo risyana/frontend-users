@@ -19,6 +19,8 @@ const HEADER = {
     'Origin, X-Requested-With, Content-Type, Accept, Authorization',
 };
 
+const ENDPOINT = 'http://localhost:2121';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +48,7 @@ class App extends Component {
   }
 
   onRegisterHandler(user) {
-    fetch('http://localhost:2121/users/', {
+    fetch(`${ENDPOINT}/users/`, {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(user),
@@ -63,6 +65,9 @@ class App extends Component {
       .then(() => {
         this.setState({ redirectAfterRegister: true });
       })
+      .then(() => {
+        this.setState({ redirectAfterRegister: false });
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -70,7 +75,7 @@ class App extends Component {
 
   onUpdateHandler(user) {
     // console.log(HEADER);
-    fetch(`http://localhost:2121/users/${user.id}`, {
+    fetch(`${ENDPOINT}/users/${user.id}`, {
       method: 'PATCH',
       mode: 'cors',
       body: JSON.stringify(user),
@@ -98,7 +103,7 @@ class App extends Component {
   }
 
   fetchSignInInfo(credential) {
-    fetch('http://localhost:2121/users/signin', {
+    fetch(`${ENDPOINT}/users/signin`, {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(credential),
@@ -119,6 +124,7 @@ class App extends Component {
       });
   }
 
+
   render() {
     const { user, redirectAfterRegister } = this.state;
 
@@ -128,7 +134,7 @@ class App extends Component {
           <div className="container">
             <div className="header">
               <h2>
-                user management
+                {'user management'}
               </h2>
               <div>
                 {user ? user.email : ''}
@@ -167,14 +173,14 @@ class App extends Component {
               }
               <Route component={() => (
                 <h1>
-                  404: not found
+                  {'404: not found'}
                 </h1>
               )}
               />
             </Switch>
             <div className="footer">
               <p>
-                risyana.github.io
+                {'risyana.github.io'}
               </p>
             </div>
           </div>
