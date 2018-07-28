@@ -11,8 +11,6 @@ class PasswordForm extends React.Component {
         id: '',
         email: '',
         password: '',
-        name: '',
-        phone: '',
         newPassword: '',
         reNewPassword: '',
       },
@@ -32,8 +30,11 @@ class PasswordForm extends React.Component {
   }
 
   componentWillMount() {
-    const { user } = this.props;
-    this.setState({ user });
+    const stateUser = this.state.user;
+    const propsUser = this.props.user;
+
+    const storedUser = { id: propsUser.id, email: propsUser.email };
+    this.setState({ user: { ...stateUser, ...storedUser } });
   }
 
   updateValues(e) {
