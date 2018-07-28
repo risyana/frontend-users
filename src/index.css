@@ -1,178 +1,220 @@
-
 /*BODY*/
+
 @import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
 
-body{
- font-family: 'Didact Gothic', sans-serif;
- background-color: #eeeeee;
+body {
+  font-family: 'Didact Gothic', sans-serif;
+  background-color: #eeeeee;
 }
 
 
 /*LAYOUT*/
 
-div.container{
-  display:flex;
-  flex-wrap:wrap;
+div.container {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
 }
 
-div.container > div.header {
-  width:100%; 
-  display:flex; 
+div.container>div.header {
+  width: 100%;
+  display: flex;
   justify-content: space-between;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   /* border : 3px solid blue; */
 }
 
-div.container > div.header > h2 {
-	 margin-top:-5px; 
-   margin-bottom:-2px; 
-   /* border : 1px solid orange; */
+div.container>div.header>h2 {
+  margin-top: -5px;
+  margin-bottom: -2px;
+  /* border : 1px solid orange; */
 }
 
-div.container > div.header > div{ /*email*/
-   /* border : 1px solid orange; */
+div.container>div.header>div {
+  /*email*/
+  /* border : 1px solid orange; */
 }
 
-div.container > div.nav{
-  width:15%;
+div.container>div.nav {
+  width: 15%;
   min-height: 100vh;
   /* border : 1px solid green; */
 }
 
-div.container > div.nav > ul {
-  width:100%;
+div.container>div.nav>ul {
+  width: 100%;
   /* border : 1px solid yellow; */
 }
 
-div.container > div.nav > ul > li{
-  width:100%;
+div.container>div.nav>ul>li {
+  width: 100%;
   padding-bottom: 10px;
 }
 
-div.container > div.main{
-  width:80%;
+div.container>div.main {
+  width: 80%;
   min-height: 100vh;
 }
 
-div.container > div.main > h2{
-  margin : 10px;
+div.container>div.main>h2 {
+  margin: 10px;
 }
 
-@media (max-width : 700px){
-    div.container > div.nav {
-      width:100%;
-      min-height: auto;
-     }
-    div.container > div.main{
-      width : 100%;
-      min-height: 100vh;
-    }
-    div.container > div.main > h2{
-      margin : 0;
-    }
-    div.container > div.nav > ul > li{
-      width:auto;
-    }
+@media (max-width: 700px) {
+  div.container>div.nav {
+    width: 100%;
+    min-height: auto;
+  }
+  div.container>div.main {
+    width: 100%;
+    min-height: 100vh;
+  }
+  div.container>div.main>h2 {
+    margin: 0;
+  }
+  div.container>div.nav>ul>li {
+    width: auto;
+  }
 }
 
-div.container > div.footer{
-  width:100%;
-  text-align:center;
+div.container>div.footer {
+  width: 100%;
+  text-align: center;
   /* border : 1px solid green; */
-
 }
 
 /*PORTFOLIO LIST*/
-div.record{ 
-  display:flex;  
-  white-space:nowrap;
-  justify-content:spaced-between;
-  line-height: 24px;  
-  }
+
+div.record {
+  display: flex;
+  white-space: nowrap;
+  justify-content: spaced-between;
+  line-height: 24px;
+}
 
 div.head {
-  font-weight : bold;
-  margin-bottom:-10px;
-  margin-top:-10px;
+  font-weight: bold;
+  margin-bottom: -10px;
+  margin-top: -10px;
 }
 
-div.record > span.column{
- overflow: hidden; 
- text-overflow: ellipsis;
- padding-left:5px;
+div.record>span.column {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 5px;
 }
 
-div.record > span.actionButton{
-  margin:2px;
+div.record>span.actionButton {
+  margin: 2px;
 }
 
-span.pIdx{ width:3%; } 
-span.pName{ width:20%; } 
-span.pDesc{ width:25%; } 
-span.pTech{ width:20%; } 
-span.pGithub{ width:10%;} 
-span.pUrl{ width:10%; } /*not used*/
+span.pIdx {
+  width: 3%;
+}
 
+span.pName {
+  width: 20%;
+}
 
-button.defButton{
-  width:70px; 
-  cursor:pointer; 
-  border : gray;
-  background-color: rgba(0,0,0,0.1); 
-  border-radius:4px; } 
+span.pDesc {
+  width: 25%;
+}
 
-button.show{ color:black; } 
-button.hide{ color:blue; }
+span.pTech {
+  width: 20%;
+}
 
-a{ 
-  text-decoration:none; 
-  color:#1fbba6; } 
-a:hover{ 
-  color:orange; }
+span.pGithub {
+  width: 10%;
+}
+
+span.pUrl {
+  width: 10%;
+}
+
+/*not used*/
+
+button.defButton {
+  width: 70px;
+  cursor: pointer;
+  border: gray;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+button.show {
+  color: black;
+}
+
+button.hide {
+  color: blue;
+}
+
+a {
+  text-decoration: none;
+  color: #1fbba6;
+}
+
+a:hover {
+  color: orange;
+}
 
 /*PORTFOLIO FORM*/
-form.portfolioForm > div {
-  display:flex;
-  margin:5px;
+
+form.portfolioForm>div {
+  display: flex;
+  margin: 5px;
 }
 
-form.portfolioForm > div > span {
-  width: 100px; 
-  line-height:40px;
-  vertical-align:middle;
+form.portfolioForm>div>span {
+  width: 200px;
+  line-height: 40px;
+  vertical-align: middle;
+  box-sizing: border-box;
 }
 
-form.portfolioForm > div > input, select{ 
+form.portfolioForm>div>span.message {
+  padding-left: 3px;
+  width: 600px;
+  color: tomato;
+}
 
-  border : 1px solid rgba(0,0,0,0.1);
+form.portfolioForm>div>input,
+select {
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px;
-  padding-top:3px;
-  border-radius : 5px;
+  padding-top: 3px;
+  border-radius: 5px;
   font-family: 'Didact Gothic', sans-serif;
-  font-size : 16px;
-  box-sizing:border-box;
-  width:400px;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 400px;
 }
 
-textarea, div.marked{ 
-  width:400px; 
-  height:300px; 
-  margin-right:2px; 
-  border : 1px solid rgba(0,0,0,0.1); 
-  padding: 5px; 
-  padding-top:3px; 
-  border-radius : 5px; 
+form.portfolioForm>div>input[type=button] {
+  width: 200px;
+}
+
+textarea,
+div.marked {
+  width: 400px;
+  height: 300px;
+  margin-right: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  padding-top: 3px;
+  border-radius: 5px;
   font-family: 'Didact Gothic', sans-serif;
-  font-size : 16px; 
-  box-sizing:border-box;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 /*LOGIN FORM*/
 
 div.loginWrapper {
   margin: auto;
-  width : 50%;
+  width: 50%;
 }
 
 form.login {
@@ -180,35 +222,36 @@ form.login {
   flex-wrap: wrap;
   width: 500px;
 }
-form.login > div {
-  display:flex;
+
+form.login>div {
+  display: flex;
   padding: 5px;
 }
 
-form.login > div > span {
-  width: 100px; 
-  line-height:40px;
-  vertical-align:middle;
+form.login>div>span {
+  width: 100px;
+  line-height: 40px;
+  vertical-align: middle;
 }
 
-form.login > div > input { 
-  border : 1px solid rgba(0,0,0,0.1);
+form.login>div>input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px;
-  padding-top:3px;
-  border-radius : 5px;
+  padding-top: 3px;
+  border-radius: 5px;
   font-family: 'Didact Gothic', sans-serif;
-  font-size : 16px;
-  box-sizing:border-box;
-  width:300px;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 300px;
 }
 
-@media (max-width: 700px){
-  form.login > div > input { 
-    width:200px;
+@media (max-width: 700px) {
+  form.login>div>input {
+    width: 200px;
   }
 }
 
-@media (max-width: 470px){
+@media (max-width: 470px) {
   div.loginWrapper {
     width: 100%;
   }
@@ -216,26 +259,34 @@ form.login > div > input {
 
 
 /*PAGE LIST*/
- 
- span.pTitle {width: 10%} 
- span.pContent {width: 40%}
+
+span.pTitle {
+  width: 10%
+}
+
+span.pContent {
+  width: 40%
+}
 
 /* GENERAL */
 
-  input.btn{
-    cursor:pointer;
-    width:100px;
-  }
-
-  input.delete{
-    background-color: rgb(255, 81, 81);
-  }
-
- input.btn:hover{ 
-   background-color: rgba(0,0,0,0.1); 
+input.btnDisabled {
+  cursor: not-allowed;
 }
 
- input.delete:hover{ 
-   background-color: rgb(255, 163, 163);
- }
+input.btn {
+  cursor: pointer;
+  font-weight: bolder;
+}
 
+input.delete {
+  background-color: rgb(255, 81, 81);
+}
+
+input.btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+input.delete:hover {
+  background-color: rgb(255, 163, 163);
+}
