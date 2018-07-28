@@ -16,19 +16,19 @@ export const validatePassword = (password) => {
 
 
 // RETYPE PASSWORD
-export const validateRePassword = (rePassword, isValid, user) => {
+export const validateRePassword = (rePassword, isValid, password) => {
   // validate mandatory
   if (!rePassword) {
     return { isValid: false, message: 'please retype password' };
   }
 
   // check if the password already valid
-  if (!isValid.password) {
+  if (!isValid) {
     return { isValid: false, message: 'the above password is not valid yet' };
   }
 
   // compare with password
-  if (rePassword !== user.password) {
+  if (rePassword !== password) {
     return { isValid: false, message: 'password doesn\'t match' };
   }
 
