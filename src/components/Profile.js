@@ -11,7 +11,7 @@ const Profile = (props) => {
   return (
     <div className="main">
       <h2>
-        Edit Profile
+        {'Edit Profile'}
       </h2>
       <Switch>
         <Route
