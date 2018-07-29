@@ -75,7 +75,7 @@ class PasswordForm extends React.Component {
 
   render() {
     const { user, message, isValid } = this.state;
-    const { onUpdateHandler, title } = this.props;
+    const { onEditPasswordHandler, title } = this.props;
 
     const isFormValid = isValid.password && isValid.newPassword && isValid.reNewPassword;
 
@@ -139,7 +139,7 @@ class PasswordForm extends React.Component {
               type="button"
               value="Update"
               onClick={() => {
-                onUpdateHandler(user);
+                onEditPasswordHandler(user.email, user.password, user.newPassword);
               }}
             />
           </div>

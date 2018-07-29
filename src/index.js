@@ -38,6 +38,7 @@ class App extends Component {
 
     this.onRegisterHandler = this.onRegisterHandler.bind(this);
     this.onUpdateHandler = this.onUpdateHandler.bind(this);
+    this.onEditPasswordHandler = this.onEditPasswordHandler.bind(this);
   }
 
   onLogout() {
@@ -98,6 +99,33 @@ class App extends Component {
       });
   }
 
+  onEditPasswordHandler(email, password, newPassword) {
+    fetch(`${ENDPOINT}/users/signin`, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({ email, password }),
+      headers: { ...HEADER },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        alert('Username and Password does not match');
+        return null;
+      })
+      .then((result) => {
+        this.setSignInInfo(result.user, newPassword);
+      })
+      .then(() => {
+        const { user } = this.state;
+        user.password = newPassword;
+        this.onUpdateHandler(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   setSignInInfo(result, password) {
     result = { ...result, password };
     this.setState({ user: result, redirectAfterRegister: true });
@@ -114,7 +142,7 @@ class App extends Component {
         if (response.status === 200) {
           return response.json();
         }
-        alert('Login Failed');
+        alert('Username and Password does not match');
         return null;
       })
       .then((result) => {
@@ -163,7 +191,7 @@ class App extends Component {
               <Route
                 path="/password"
                 component={() => (
-                  <Password user={user} onUpdateHandler={this.onUpdateHandler} />
+                  <Password user={user} onEditPasswordHandler={this.onEditPasswordHandler} />
                 )}
               />
               {

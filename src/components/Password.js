@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PasswordForm from './PasswordForm';
 
 const Password = (props) => {
-  const { user, onUpdateHandler } = props;
+  const { user, onEditPasswordHandler } = props;
 
   if (!user) return <Redirect to="/" />;
 
@@ -17,7 +17,7 @@ const Password = (props) => {
         <Route
           path="/password/edit/:id" // update
           component={() => (
-            <PasswordForm user={user} onUpdateHandler={onUpdateHandler} />
+            <PasswordForm user={user} onEditPasswordHandler={onEditPasswordHandler} />
           )}
         />
       </Switch>
