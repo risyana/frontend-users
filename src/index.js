@@ -41,6 +41,16 @@ class App extends Component {
     this.onEditPasswordHandler = this.onEditPasswordHandler.bind(this);
   }
 
+  componentDidMount() {
+    fetch(`${ENDPOINT}/users/`)
+      .then(() => {
+        console.log('Resource available');
+      })
+      .catch((err) => {
+        alert(`${err}\n${ENDPOINT}`);
+      });
+  }
+
   onLogout() {
     this.setState({ user: null, redirectAfterRegister: false });
   }
@@ -71,12 +81,11 @@ class App extends Component {
         this.setState({ redirectAfterRegister: false });
       })
       .catch((err) => {
-        console.log(err);
+        alert(`${err}\n${ENDPOINT}`);
       });
   }
 
   onUpdateHandler(user) {
-    // console.log(HEADER);
     fetch(`${ENDPOINT}/users/${user.id}`, {
       method: 'PATCH',
       mode: 'cors',
@@ -95,7 +104,7 @@ class App extends Component {
         this.setSignInInfo(result.updatedUser, user.password); // {email, id, name, phone}
       })
       .catch((err) => {
-        console.log(err);
+        alert(`${err}\n${ENDPOINT}`);
       });
   }
 
@@ -122,7 +131,7 @@ class App extends Component {
         this.onUpdateHandler(user);
       })
       .catch((err) => {
-        console.log(err);
+        alert(`${err}\n${ENDPOINT}`);
       });
   }
 
@@ -149,10 +158,9 @@ class App extends Component {
         this.setSignInInfo(result.user, credential.password); // {email, id, name, phone}
       })
       .catch((err) => {
-        console.log(err);
+        alert(`${err}\n${ENDPOINT}`);
       });
   }
-
 
   render() {
     const { user, redirectAfterRegister } = this.state;
