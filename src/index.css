@@ -4,7 +4,6 @@
 
 body {
   font-family: 'Didact Gothic', sans-serif;
-  background-color: #eeeeee;
 }
 
 
@@ -14,6 +13,11 @@ div.container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: 5px;
+  width: 75%;
+  margin: 0 auto;
+  background-color: #eeeeee;
+  box-shadow: 0px 2px 7px 2px gray;
 }
 
 div.container>div.header {
@@ -21,29 +25,31 @@ div.container>div.header {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* border : 3px solid blue; */
+  /* border: 3px solid blue;
+  padding: 5px; */
 }
 
-div.container>div.header>h2 {
+div.container>div.header>h1 {
   margin-top: -5px;
   margin-bottom: -2px;
-  /* border : 1px solid orange; */
+  margin: 0 auto;
+  /* border: 1px solid orange; */
 }
 
 div.container>div.header>div {
   /*email*/
-  /* border : 1px solid orange; */
+  /* border: 1px solid orange; */
 }
 
 div.container>div.nav {
   width: 15%;
-  min-height: 100vh;
-  /* border : 1px solid green; */
+  min-height: 80vh;
+  /* border: 1px solid green; */
 }
 
 div.container>div.nav>ul {
   width: 100%;
-  /* border : 1px solid yellow; */
+  /* border: 1px solid yellow; */
 }
 
 div.container>div.nav>ul>li {
@@ -53,7 +59,8 @@ div.container>div.nav>ul>li {
 
 div.container>div.main {
   width: 80%;
-  min-height: 100vh;
+  min-height: 80vh;
+  /* border: 1px solid red; */
 }
 
 div.container>div.main>h2 {
@@ -61,13 +68,16 @@ div.container>div.main>h2 {
 }
 
 @media (max-width: 700px) {
+  div.container {
+    width: 90%;
+  }
   div.container>div.nav {
     width: 100%;
     min-height: auto;
   }
   div.container>div.main {
     width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
   }
   div.container>div.main>h2 {
     margin: 0;
@@ -80,7 +90,7 @@ div.container>div.main>h2 {
 div.container>div.footer {
   width: 100%;
   text-align: center;
-  /* border : 1px solid green; */
+  /* border: 1px solid green; */
 }
 
 /*PORTFOLIO LIST*/
@@ -161,27 +171,33 @@ a:hover {
 
 /*PORTFOLIO FORM*/
 
+form.portfolioForm {
+  /* border: 1px solid navy; */
+}
+
 form.portfolioForm>div {
   display: flex;
   margin: 5px;
+  /* border: 1px solid orange; */
 }
 
 form.portfolioForm>div>span {
-  width: 200px;
+  min-width: 160px;
   line-height: 40px;
   vertical-align: middle;
   box-sizing: border-box;
+  /* border: 1px solid tomato; */
 }
 
 form.portfolioForm>div>span.message {
   padding-left: 3px;
-  width: 600px;
+  min-width: 600px;
   color: tomato;
+  font-size: 0.9em;
 }
 
 form.portfolioForm>div>input,
 select {
-
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px;
   padding-top: 3px;
@@ -189,43 +205,31 @@ select {
   font-family: 'Didact Gothic', sans-serif;
   font-size: 16px;
   box-sizing: border-box;
-  width: 400px;
+  min-width: 250px;
 }
 
 form.portfolioForm>div>input[type=button] {
-  width: 200px;
+  min-width: 200px;
 }
 
-textarea,
-div.marked {
-  width: 400px;
-  height: 300px;
-  margin-right: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 5px;
-  padding-top: 3px;
-  border-radius: 5px;
-  font-family: 'Didact Gothic', sans-serif;
-  font-size: 16px;
-  box-sizing: border-box;
-}
 
 /*LOGIN FORM*/
 
 div.loginWrapper {
-  margin: auto;
-  width: 50%;
+  /* border: 1px solid goldenrod; */
 }
 
 form.login {
   display: flex;
   flex-wrap: wrap;
   width: 500px;
+  /* border: 1px solid rebeccapurple; */
 }
 
 form.login>div {
   display: flex;
   padding: 5px;
+  /* border: 1px solid greenyellow; */
 }
 
 form.login>div>span {

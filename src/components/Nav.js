@@ -13,11 +13,14 @@ const UL_STYLE = {
 const Nav = (props) => {
   const { onlogout, user } = props;
 
-  if (!user) return null;
+  if (!user) return <div className="nav" />;
 
   return (
     <div className="nav">
       <ul style={UL_STYLE}>
+        <li>
+          <Link to="/" />
+        </li>
         <li>
           <Link to={`/profile/edit/${user.id}`}>
             {'Edit Profil'}
@@ -27,6 +30,9 @@ const Nav = (props) => {
           <Link to={`/password/edit/${user.id}`}>
             {'Edit Password'}
           </Link>
+        </li>
+        <li>
+          <Link to="/" />
         </li>
         <li>
           <Link to="/" />
