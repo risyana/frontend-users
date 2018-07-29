@@ -2,13 +2,13 @@
 export const validatePassword = (password) => {
   // validate mandatory
   if (!password) {
-    return { isValid: false, message: 'please input password' };
+    return { isValid: false, message: 'Please input password' };
   }
 
   // validate password criteria : 8 digit; contain word and letter
   const passwordFormat = /^(?=.*?\D)(?=.*?\d).{8,}$/g;
   if (!password.match(passwordFormat)) {
-    return { isValid: false, message: 'password must at least 8 digit which contain letter and number' };
+    return { isValid: false, message: 'At least 8 digit which contain letter and number' };
   }
 
   return { isValid: true, message: '' };
@@ -19,7 +19,7 @@ export const validatePassword = (password) => {
 export const validateRePassword = (rePassword, isValid, password) => {
   // validate mandatory
   if (!rePassword) {
-    return { isValid: false, message: 'please retype password' };
+    return { isValid: false, message: 'Please retype password' };
   }
 
   // check if the password already valid
