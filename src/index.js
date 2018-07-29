@@ -155,7 +155,9 @@ class App extends Component {
         return null;
       })
       .then((result) => {
-        this.setSignInInfo(result.user, credential.password); // {email, id, name, phone}
+        if (result) {
+          this.setSignInInfo(result.user, credential.password); // {email, id, name, phone}
+        }
       })
       .catch((err) => {
         alert(`${err}\n${ENDPOINT}`);
@@ -170,9 +172,9 @@ class App extends Component {
         <Router history={history}>
           <div className="container">
             <div className="header">
-              <h2>
-                {'user management'}
-              </h2>
+              <h1>
+                {'User Management'}
+              </h1>
               <div>
                 {user ? user.email : ''}
               </div>
