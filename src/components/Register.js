@@ -4,9 +4,6 @@ import validateEmail from '../validations/email';
 import validatePhone from '../validations/phone';
 import validateName from '../validations/name';
 import { validatePassword, validateRePassword } from '../validations/password';
-import CONFIG from '../config/config';
-
-const { ENDPOINT } = CONFIG;
 
 class Register extends React.Component {
   constructor(props) {
@@ -19,10 +16,6 @@ class Register extends React.Component {
         name: '',
         phone: '',
         rePassword: '',
-      },
-      existingUser: {
-        email: [],
-        phone: [],
       },
       isValid: {
         email: false,
@@ -43,29 +36,10 @@ class Register extends React.Component {
     this.updateValues = this.updateValues.bind(this);
   }
 
-  componentDidMount() {
-    fetch(`${ENDPOINT}/users`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        const existingUser = { email: [], phone: [] };
-        result.user.map((user) => {
-          existingUser.email.push(user.email);
-          existingUser.phone.push(user.phone);
-          return true;
-        });
-        this.setState({ existingUser });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  updateValues(e) {
+  async updateValues(e) {
     const {
       user, isValid,
-      message, existingUser,
+      message,
     } = this.state;
 
     const { id, value } = e.target;
@@ -74,10 +48,10 @@ class Register extends React.Component {
 
     switch (id) {
       case 'email':
-        validationResult = validateEmail(value, existingUser);
+        validationResult = await validateEmail(value);
         break;
       case 'phone':
-        validationResult = validatePhone(value, existingUser);
+        validationResult = await validatePhone(value);
         break;
       case 'name':
         validationResult = validateName(value);

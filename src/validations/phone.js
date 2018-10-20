@@ -1,4 +1,9 @@
-const validatePhone = (phone, existingUser) => {
+import CONFIG from '../config/config';
+import HEADER from '../config/header';
+
+const { ENDPOINT } = CONFIG;
+
+const validatePhone = async (phone) => {
   // validate mandatory
   if (!phone) {
     return { isValid: false, message: 'please input phone number' };
@@ -11,7 +16,15 @@ const validatePhone = (phone, existingUser) => {
   }
 
   // validate unique (check existing phone number)
-  if (existingUser.phone.find(existingPhone => existingPhone === phone)) {
+  const res = await fetch(`${ENDPOINT}/users/phones`, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify({ phone }),
+    headers: { ...HEADER },
+  });
+  const result = await res.json();
+  const isAvailable = result.row.COUNT === 0;
+  if (!isAvailable) {
     return { isValid: false, message: 'phone number already taken' };
   }
 
