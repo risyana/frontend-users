@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import validatePhone from '../validations/phone';
 import validateName from '../validations/name';
-import CONFIG from '../config/config';
-
-const { ENDPOINT } = CONFIG;
 
 class PageForm extends React.Component {
   constructor(props) {
@@ -17,10 +14,6 @@ class PageForm extends React.Component {
         password: '',
         name: '',
         phone: '',
-      },
-      existingUser: {
-        email: [],
-        phone: [],
       },
       isValid: {
         email: true,
@@ -38,31 +31,16 @@ class PageForm extends React.Component {
   }
 
   componentWillMount() {
-    const { user } = this.props;
-    this.setState({ user });
-
-    fetch(`${ENDPOINT}/users`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        const existingUser = { email: [], phone: [] };
-        result.user.map((usr) => {
-          existingUser.email.push(usr.email);
-          existingUser.phone.push(usr.phone);
-          return true;
-        });
-        this.setState({ existingUser });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.setState((prevState, props) => {
+      const { user } = props;
+      return { user };
+    });
   }
 
-  updateValues(e) {
+  async updateValues(e) {
     const {
       user, isValid,
-      message, existingUser,
+      message,
     } = this.state;
 
     const { id, value } = e.target;
@@ -71,7 +49,7 @@ class PageForm extends React.Component {
 
     switch (id) {
       case 'phone':
-        validationResult = validatePhone(value, existingUser);
+        validationResult = await validatePhone(value);
         break;
       case 'name':
         validationResult = validateName(value);
