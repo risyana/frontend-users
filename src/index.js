@@ -18,6 +18,7 @@ const HEADER = {
   'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
   'Access-Control-Allow-Headers':
     'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  Authorization: `Bearer ${localStorage.getItem('token')}`,
 };
 
 const ENDPOINT = 'http://localhost:2121';
@@ -101,7 +102,8 @@ class App extends Component {
         return null;
       })
       .then((result) => {
-        this.setSignInInfo(result.updatedUser, user.password); // {email, id, name, phone}
+        const token = localStorage.getItem('token');
+        this.setSignInInfo(result.updatedUser, user.password, token); // {email, id, name, phone}
       })
       .catch((err) => {
         alert(`${err}\n${ENDPOINT}`);
@@ -123,7 +125,8 @@ class App extends Component {
         return null;
       })
       .then((result) => {
-        this.setSignInInfo(result.user, newPassword);
+        const token = localStorage.getItem('token');
+        this.setSignInInfo(result.updatedUser, newPassword, token); // {email, id, name, phone}
       })
       .then(() => {
         const { user } = this.state;
@@ -135,9 +138,10 @@ class App extends Component {
       });
   }
 
-  setSignInInfo(result, password) {
+  setSignInInfo(result, password, token) {
     result = { ...result, password };
     this.setState({ user: result, redirectAfterRegister: true });
+    localStorage.setItem('token', token);
   }
 
   fetchSignInInfo(credential) {
@@ -156,7 +160,7 @@ class App extends Component {
       })
       .then((result) => {
         if (result) {
-          this.setSignInInfo(result.user, credential.password); // {email, id, name, phone}
+          this.setSignInInfo(result.user, credential.password, result.token); // {email, id, name, phone}
         }
       })
       .catch((err) => {
