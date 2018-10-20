@@ -9,19 +9,11 @@ import Nav from './components/Nav';
 import Profile from './components/Profile';
 import Password from './components/Password';
 import CONFIG from './config/config';
+import HEADER from './config/header';
 
 import './index.css';
 
 const history = createBrowserHistory();
-
-const HEADER = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-  'Access-Control-Allow-Headers':
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-  Authorization: `Bearer ${localStorage.getItem('token')}`,
-};
 
 const { ENDPOINT } = CONFIG;
 
