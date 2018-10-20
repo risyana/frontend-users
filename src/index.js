@@ -37,9 +37,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${ENDPOINT}/users/`)
-      .then(() => {
-        console.log('Resource available');
+    fetch(`${ENDPOINT}/users/test/`)
+      .then(res => res.json())
+      .then((result) => {
+        console.log(result.message);
       })
       .catch((err) => {
         alert(`${err}\n${ENDPOINT}`);
