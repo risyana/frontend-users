@@ -4,8 +4,9 @@ import validateEmail from '../validations/email';
 import validatePhone from '../validations/phone';
 import validateName from '../validations/name';
 import { validatePassword, validateRePassword } from '../validations/password';
+import CONFIG from '../config/config';
 
-const ENDPOINT = 'http://localhost:2121';
+const { ENDPOINT } = CONFIG;
 
 class Register extends React.Component {
   constructor(props) {

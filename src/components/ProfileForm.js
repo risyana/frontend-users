@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import validatePhone from '../validations/phone';
 import validateName from '../validations/name';
+import CONFIG from '../config/config';
 
-const ENDPOINT = 'http://localhost:2121';
+const { ENDPOINT } = CONFIG;
 
 class PageForm extends React.Component {
   constructor(props) {

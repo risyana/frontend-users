@@ -8,6 +8,8 @@ import Login from './components/Login';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
 import Password from './components/Password';
+import CONFIG from './config/config';
+
 import './index.css';
 
 const history = createBrowserHistory();
@@ -21,7 +23,7 @@ const HEADER = {
   Authorization: `Bearer ${localStorage.getItem('token')}`,
 };
 
-const ENDPOINT = 'http://localhost:2121';
+const { ENDPOINT } = CONFIG;
 
 class App extends Component {
   constructor(props) {
