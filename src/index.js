@@ -37,13 +37,31 @@ class App extends Component {
     this.onEditPasswordHandler = this.onEditPasswordHandler.bind(this);
 
     this.proceedEditPassword = this.proceedEditPassword.bind(this);
+    this.fetchSingleUser = this.fetchSingleUser.bind(this);
+  }
+
+  async fetchSingleUser(user) {
+    try {
+      const response = await fetch(`${ENDPOINT}/users/${user.id}`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: { ...HEADER }
+      });
+      const result = await response.json();
+      if (response.status !== 200) return false;
+      return result.user;
+    } catch (err) {
+      console.log(err);
+    }
+    return false;
   }
 
   async componentWillMount() {
     // check if token exist in local storage
     const signInInfo = await this.isTokenValid();
     if (signInInfo) {
-      this.setSignInInfo(signInInfo.user, localStorage.getItem('token')); // it will render 'Dashboard'
+      const user = await this.fetchSingleUser(signInInfo.user);
+      this.setSignInInfo(user, localStorage.getItem('token')); // it will render 'Dashboard'
     } else {
       localStorage.removeItem('token'); // remove token in local storage and will render 'Login'
     }
