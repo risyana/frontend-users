@@ -25,6 +25,7 @@ class App extends Component {
       redirectAfterRegister: false,
     };
 
+    this.isTokenValid = this.isTokenValid.bind(this);
     this.onLogout = this.onLogout.bind(this);
 
     this.fetchSignInInfo = this.fetchSignInInfo.bind(this);
@@ -34,6 +35,16 @@ class App extends Component {
     this.onRegisterHandler = this.onRegisterHandler.bind(this);
     this.onUpdateHandler = this.onUpdateHandler.bind(this);
     this.onEditPasswordHandler = this.onEditPasswordHandler.bind(this);
+  }
+
+  async componentWillMount() {
+    // check if token exist in local storage
+    const signInInfo = await this.isTokenValid();
+    if (signInInfo) {
+      this.setSignInInfo(signInInfo.user, null, localStorage.getItem('token')); // it will render 'Dashboard'
+    } else {
+      localStorage.removeItem('token'); // remove token in local storage and will render 'Login'
+    }
   }
 
   componentDidMount() {
@@ -158,6 +169,21 @@ class App extends Component {
         alert(`${err}\n${ENDPOINT}`);
       });
   }
+
+  isTokenValid = async () => {
+    try {
+      const response = await fetch(`${ENDPOINT}/general/token`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { ...HEADER }
+      });
+      const result = await response.json();
+      if (response.status !== 200) return false;
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     const { user, redirectAfterRegister } = this.state;
