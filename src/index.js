@@ -49,6 +49,7 @@ class App extends Component {
 
   onLogout() {
     this.setState({ user: null, redirectAfterRegister: false });
+    localStorage.removeItem('token');
   }
 
   onSignInHandler(credential) {
