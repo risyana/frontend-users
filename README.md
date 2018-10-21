@@ -12,7 +12,7 @@ Please ensure these were installed :
 ### Installation
 
 * Clone this repo to your local machine
-* run `npm install` in root folder.
+* run `npm install`.
 
 ### Development server
 
