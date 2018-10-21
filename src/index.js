@@ -116,12 +116,7 @@ class App extends Component {
         if (response.status === 200) {
           return response.json();
         }
-        alert('Username and Password does not match');
-        return null;
-      })
-      .then((result) => {
-        const token = localStorage.getItem('token');
-        this.setSignInInfo(result.updatedUser, newPassword, token); // {email, id, name, phone}
+        throw new Error('Email & Current Password does not match');
       })
       .then(() => {
         const { user } = this.state;
