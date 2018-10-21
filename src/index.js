@@ -35,13 +35,15 @@ class App extends Component {
     this.onRegisterHandler = this.onRegisterHandler.bind(this);
     this.onUpdateHandler = this.onUpdateHandler.bind(this);
     this.onEditPasswordHandler = this.onEditPasswordHandler.bind(this);
+
+    this.proceedEditPassword = this.proceedEditPassword.bind(this);
   }
 
   async componentWillMount() {
     // check if token exist in local storage
     const signInInfo = await this.isTokenValid();
     if (signInInfo) {
-      this.setSignInInfo(signInInfo.user, null, localStorage.getItem('token')); // it will render 'Dashboard'
+      this.setSignInInfo(signInInfo.user, localStorage.getItem('token')); // it will render 'Dashboard'
     } else {
       localStorage.removeItem('token'); // remove token in local storage and will render 'Login'
     }
@@ -110,7 +112,7 @@ class App extends Component {
       })
       .then((result) => {
         const token = localStorage.getItem('token');
-        this.setSignInInfo(result.updatedUser, user.password, token); // {email, id, name, phone}
+        this.setSignInInfo(result.updatedUser, token); // {email, id, name, phone}
       })
       .catch((err) => {
         alert(`${err}\n${ENDPOINT}`);
@@ -133,17 +135,41 @@ class App extends Component {
       .then(() => {
         const { user } = this.state;
         user.password = newPassword;
-        this.onUpdateHandler(user);
+        this.proceedEditPassword(user);
       })
       .catch((err) => {
         alert(`${err}\n${ENDPOINT}`);
       });
   }
 
-  setSignInInfo(result, password, token) {
-    result = { ...result, password };
+  setSignInInfo(result, token) {
+    result = { ...result };
     this.setState({ user: result, redirectAfterRegister: true });
     localStorage.setItem('token', token);
+  }
+
+  proceedEditPassword(user) {
+    fetch(`${ENDPOINT}/users/password/${user.id}`, {
+      method: 'PATCH',
+      mode: 'cors',
+      body: JSON.stringify({ password: user.password }),
+      headers: { ...HEADER },
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          alert('Update Success !');
+          return response.json();
+        }
+        alert('Update Failed');
+        return null;
+      })
+      .then((result) => {
+        const token = localStorage.getItem('token');
+        this.setSignInInfo(result.updatedUser, token); // {email, id, name, phone}
+      })
+      .catch((err) => {
+        alert(`${err}\n${ENDPOINT}`);
+      });
   }
 
   fetchSignInInfo(credential) {
@@ -162,7 +188,7 @@ class App extends Component {
       })
       .then((result) => {
         if (result) {
-          this.setSignInInfo(result.user, credential.password, result.token); // {email, id, name, phone}
+          this.setSignInInfo(result.user, result.token); // {email, id, name, phone}
         }
       })
       .catch((err) => {
@@ -170,7 +196,7 @@ class App extends Component {
       });
   }
 
-  isTokenValid = async () => {
+ async isTokenValid() {
     try {
       const response = await fetch(`${ENDPOINT}/general/token`, {
         method: 'POST',
@@ -183,6 +209,7 @@ class App extends Component {
     } catch (err) {
       console.log(err);
     }
+    return true;
   };
 
   render() {
