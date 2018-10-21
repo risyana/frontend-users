@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${ENDPOINT}/users/test/`)
+    fetch(`${ENDPOINT}/general/connection/`)
       .then(res => res.json())
       .then((result) => {
         console.log(result.message);
