@@ -3,7 +3,9 @@
   "version": "0.0.130",
   "description": "Dashboard of user management",
   "keywords": [],
-  "homepage": "https://codesandbox.io/s/1807volknq",
+  "engines": {
+    "node": "10.0.0"
+  },
   "main": "index.js",
   "dependencies": {
     "email-validator": "^2.0.4",
