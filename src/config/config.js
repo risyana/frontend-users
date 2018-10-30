@@ -1,5 +1,5 @@
 const CONFIG = {
-  ENDPOINT: 'http://eka-user-api.herokuapp.com',
+  ENDPOINT: 'https://eka-user-api.herokuapp.com',
 };
 
 export default CONFIG;
