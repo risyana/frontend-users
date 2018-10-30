@@ -4,8 +4,7 @@
   "description": "Dashboard of user management",
   "keywords": [],
   "engines": {
-    "node": "10.0.0",
-    "npm": "6.2.0"
+    "node": "10.0.0"
   },
   "main": "index.js",
   "dependencies": {
