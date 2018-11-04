@@ -101,9 +101,9 @@ class Register extends React.Component {
               {'Email'}
             </span>
             <input
+              value={user.email}
               id="email"
               type="email"
-              pattern=".+@+.+.com"
               onChange={this.updateValues}
             />
             <span className="message">
@@ -115,7 +115,12 @@ class Register extends React.Component {
             <span>
               {'Name'}
             </span>
-            <input id="name" type="text" onChange={this.updateValues} />
+            <input
+              value={user.name}
+              id="name"
+              type="text"
+              onChange={this.updateValues} 
+            />
             <span className="message">
               {message.name}
             </span>
@@ -125,7 +130,12 @@ class Register extends React.Component {
             <span>
               {'Phone'}
             </span>
-            <input id="phone" type="text" onChange={this.updateValues} />
+            <input
+              value={user.phone}
+              id="phone"
+              type="text"
+              onChange={this.updateValues}
+            />
             <span className="message">
               {message.phone}
             </span>
@@ -135,7 +145,12 @@ class Register extends React.Component {
             <span>
               {'Password'}
             </span>
-            <input id="password" type="password" onChange={this.updateValues} />
+            <input
+              value={user.password}
+              id="password"
+              type="password"
+              onChange={this.updateValues}
+            />
             <span className="message">
               {message.password}
             </span>
@@ -145,7 +160,12 @@ class Register extends React.Component {
             <span>
               {'Retype Password'}
             </span>
-            <input id="rePassword" type="password" onChange={this.updateValues} />
+            <input
+              value={user.rePassword}
+              id="rePassword"
+              type="password"
+              onChange={this.updateValues}
+            />
             <span className="message">
               {message.rePassword}
             </span>
