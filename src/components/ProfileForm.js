@@ -1,34 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { debounce } from 'lodash';
 import validatePhone from '../validations/phone';
 import validateName from '../validations/name';
 
 class PageForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      user: {
-        id: '',
-        email: '',
-        password: '',
-        name: '',
-        phone: '',
-      },
-      isValid: {
-        email: true,
-        name: true,
-        phone: true,
-      },
-      message: {
-        email: '',
-        name: '',
-        phone: '',
-      },
-    };
-
-    this.updateValues = this.updateValues.bind(this);
-  }
+  state = {
+    user: {
+      id: '',
+      email: '',
+      password: '',
+      name: '',
+      phone: '',
+    },
+    isValid: {
+      email: true,
+      name: true,
+      phone: true,
+    },
+    message: {
+      email: '',
+      name: '',
+      phone: '',
+    },
+  };
 
   componentWillMount() {
     this.setState((prevState, props) => {
@@ -37,16 +32,17 @@ class PageForm extends React.Component {
     });
   }
 
-  async updateValues(e) {
-    const {
-      user, isValid,
-      message,
-    } = this.state;
+  updateValues = async (id, value) => {
+    const { user } = this.state;
+    const updatedInfo = { [id]: value };
+    this.setState({
+      user: { ...user, ...updatedInfo },
+    });
+  }
 
-    const { id, value } = e.target;
-
+  validateInput = async (id, value) => {
+    const { isValid, message } = this.state;
     let validationResult = true;
-
     switch (id) {
       case 'phone':
         validationResult = await validatePhone(value);
@@ -58,16 +54,17 @@ class PageForm extends React.Component {
         validationResult = { isValid: true, message: '' };
         break;
     }
-
-    const updatedInfo = { [id]: value };
-
     this.setState({
-      user: { ...user, ...updatedInfo },
       isValid: { ...isValid, [id]: validationResult.isValid },
       message: { ...message, [id]: validationResult.message },
     });
+  }
 
-    return null;
+  validateInputDebounce = debounce(this.validateInput, 600);
+
+  inputHanlder = async (id, value) => {
+    await this.updateValues(id, value);
+    await this.validateInputDebounce(id, value);
   }
 
   render() {
@@ -81,16 +78,13 @@ class PageForm extends React.Component {
         <h3>
           {title}
         </h3>
-        <form className="portfolioForm" onChange={this.updateValues}>
+        <form className="portfolioForm">
           <div>
             <span>
               {'Email'}
             </span>
             <input
               id="email"
-              type="email"
-              pattern=".+@+.+.com"
-              onChange={this.updateValues}
               value={user.email}
               disabled
             />
@@ -106,7 +100,7 @@ class PageForm extends React.Component {
             <input
               id="name"
               type="text"
-              onChange={this.updateValues}
+              onChange={e => this.inputHanlder(e.target.id, e.target.value)}
               value={user.name}
             />
             <span className="message">
@@ -121,7 +115,7 @@ class PageForm extends React.Component {
             <input
               id="phone"
               type="text"
-              onChange={this.updateValues}
+              onChange={e => this.inputHanlder(e.target.id, e.target.value)}
               value={user.phone}
             />
             <span className="message">
