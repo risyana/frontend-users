@@ -45,7 +45,7 @@ class PageForm extends React.Component {
     let validationResult = true;
     switch (id) {
       case 'phone':
-        validationResult = await validatePhone(value);
+        validationResult = await validatePhone(value, this.props.user[id]);
         break;
       case 'name':
         validationResult = validateName(value);

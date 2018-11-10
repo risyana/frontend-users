@@ -3,7 +3,12 @@ import HEADER from '../config/header';
 
 const { ENDPOINT } = CONFIG;
 
-const validatePhone = async (phone) => {
+const validatePhone = async (phone, initialPhone) => {
+  // compare new phone with initial phone in Edit Profile function
+  if(initialPhone) {
+    if (initialPhone === phone) return { isValid: true, message: '' };
+  }
+
   // validate mandatory
   if (!phone) {
     return { isValid: false, message: 'please input phone number' };
