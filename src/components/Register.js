@@ -7,7 +7,6 @@ import validateName from '../validations/name';
 import { validatePassword, validateRePassword } from '../validations/password';
 
 class Register extends React.Component {
-
   state = {
     user: {
       email: '',
@@ -39,12 +38,14 @@ class Register extends React.Component {
     this.setState({
       user: { ...user, ...updatedInfo },
     });
-    await this.validation(id, value);
   };
 
-  withDebounce = debounce(this.updateValues, 600);
+  inputHandler = async (id, value) => {
+    await this.updateValues(id, value);
+    await this.validateInputDebounce(id, value);
+  }
 
-  validation = async (id, value) => {
+  validateInput = async (id, value) => {
     const {
       user,
       isValid,
@@ -78,8 +79,9 @@ class Register extends React.Component {
       isValid: { ...isValid, [id]: validationResult.isValid },
       message: { ...message, [id]: validationResult.message },
     });
-
   }
+
+  validateInputDebounce = debounce(this.validateInput, 600);
 
   render() {
     const { user, message, isValid } = this.state;
@@ -106,7 +108,7 @@ class Register extends React.Component {
             <input
               id="email"
               type="email"
-              onChange={e => this.withDebounce(e.target.id, e.target.value)}
+              onChange={e => this.inputHandler(e.target.id, e.target.value)}
             />
             <span className="message">
               {message.email}
@@ -120,7 +122,7 @@ class Register extends React.Component {
             <input
               id="name"
               type="text"
-              onChange={e => this.withDebounce(e.target.id, e.target.value)}
+              onChange={e => this.inputHandler(e.target.id, e.target.value)}
             />
             <span className="message">
               {message.name}
@@ -134,7 +136,7 @@ class Register extends React.Component {
             <input
               id="phone"
               type="text"
-              onChange={e => this.withDebounce(e.target.id, e.target.value)}
+              onChange={e => this.inputHandler(e.target.id, e.target.value)}
             />
             <span className="message">
               {message.phone}
@@ -148,7 +150,7 @@ class Register extends React.Component {
             <input
               id="password"
               type="password"
-              onChange={e => this.withDebounce(e.target.id, e.target.value)}
+              onChange={e => this.inputHandler(e.target.id, e.target.value)}
             />
             <span className="message">
               {message.password}
@@ -162,7 +164,7 @@ class Register extends React.Component {
             <input
               id="rePassword"
               type="password"
-              onChange={e => this.withDebounce(e.target.id, e.target.value)}
+              onChange={e => this.inputHandler(e.target.id, e.target.value)}
             />
             <span className="message">
               {message.rePassword}
