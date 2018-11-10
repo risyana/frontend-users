@@ -3,31 +3,26 @@ import { Link } from 'react-router-dom';
 import { validatePassword, validateRePassword } from '../validations/password';
 
 class PasswordForm extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    user: {
+      id: '',
+      email: '',
+      password: '',
+      newPassword: '',
+      reNewPassword: '',
+    },
+    isValid: {
+      password: false,
+      newPassword: false,
+      reNewPassword: false,
+    },
+    message: {
+      password: '',
+      newPassword: '',
+      reNewPassword: '',
+    },
+  };
 
-    this.state = {
-      user: {
-        id: '',
-        email: '',
-        password: '',
-        newPassword: '',
-        reNewPassword: '',
-      },
-      isValid: {
-        password: false,
-        newPassword: false,
-        reNewPassword: false,
-      },
-      message: {
-        password: '',
-        newPassword: '',
-        reNewPassword: '',
-      },
-    };
-
-    this.updateValues = this.updateValues.bind(this);
-  }
 
   componentWillMount() {
     const stateUser = this.state.user;
@@ -37,7 +32,7 @@ class PasswordForm extends React.Component {
     this.setState({ user: { ...stateUser, ...storedUser } });
   }
 
-  updateValues(e) {
+  updateValues = (e) => {
     const {
       user, isValid,
       message, existingUser,
